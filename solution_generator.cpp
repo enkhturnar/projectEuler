@@ -4,6 +4,7 @@
 #include "p27.cpp"
 #include "p34.cpp"
 #include "p47.cpp"
+#include "p48.cpp"
 #include "solution.h"
 #include "solution_generator.h"
 
@@ -22,6 +23,9 @@ Solution* getSolution(int problemNumber){
 		case 47:
 			s = new P47();
 		break;
+		case 48:
+			s = new P48();
+		break;
 		default:
 			throw std::invalid_argument("problem number invalid");
 		break;
@@ -31,5 +35,5 @@ Solution* getSolution(int problemNumber){
 
 
 std::vector<int> availableSolutions(){
-	return {1,27,34,47};
+	return {1,27,34,47,48};
 }

@@ -1,6 +1,6 @@
 CXX			= g++
 
-CXXFLAGS = -std=c++1z -Wconversion -Wall -Werror -Wextra -pedantic
+CXXFLAGS = -std=c++1z -Wall -Werror -Wextra -pedantic
 
 EXECUTABLE = euler
 EXECUTABLE_SOURCE = euler.cpp

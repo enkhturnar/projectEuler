@@ -16,14 +16,19 @@ using namespace std;
 
 
 void getDigitsTest();
+void modFastExpTest();
 
 int main(){
 	cout << "Number library test" << endl;
 	getDigitsTest();
+	modFastExpTest();
 	cout << "ALL PASS!" << endl;
 	return 0;
 }
 
+void modFastExpTest(){
+	mAssert(modFastExp(4,4,1000000) == 256, to_string(modFastExp(4,4,1000000)));
+}
 
 
 void getDigitsTest(){
