@@ -26,3 +26,23 @@ template bool isPrime<long>(long x);
 template bool isPrime<unsigned long>(unsigned long x);
 template bool isPrime<long long>(long long x);
 template bool isPrime<unsigned long long>(unsigned long long x);
+
+
+template<typename T>
+std::map<T,T> primeFactorization(T n){
+	std::map<T,T> factorization;
+	T i = 2;
+	while( n > 1 ){
+		while(n%i == 0){
+			if(factorization.find(i) == factorization.end()){
+				factorization[i] = 0;
+			}
+			factorization[i]++;
+			n /= i;
+		}
+		i++;
+	}
+	return factorization;
+}
+
+template std::map<int,int> primeFactorization(int n);
