@@ -1,4 +1,5 @@
+make clean
 make tests
 ./test_prime
-./test_problems
+./test_number
 make clean

@@ -1,34 +1,54 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <thread>
+#include <mutex>          // std::mutex
+
+#include <map>
 
 #include "solution_generator.h"
 
 using namespace std;
 
+mutex mtx;           // mutex for critical section
+int fails = 0;
+
+void runSolution(int idx);
 int main(){
 	cout << "PROBLEMS TEST" << endl;
 	vector<int> solutionNumbers = availableSolutions();
-	int fails = 0;
-	for(auto i : solutionNumbers){
-		Solution *s = getSolution(i);
-		auto answer = s->solve();
-		auto correct = s->correct();
-		if(answer == correct){
-			cout << "P" << setw(5) << i << ": ";
-			cout << answer << " = " << correct << endl;
-		}
-		else {
-			cout << "F" << setw(5) << i << ": ";
-			cout << answer << " != " << correct << endl;
-			fails++;
-		}
+	vector<thread> threads(solutionNumbers.size());
+	for(size_t i = 0; i < solutionNumbers.size(); i++){
+		threads[i] = thread(runSolution, solutionNumbers[i]);
 	}
-	if(fails > 0){
-		cout << fails << " FAILS!!!" << endl;
+
+	for(size_t i = 0; i < solutionNumbers.size(); i++){
+		threads[i].join();
+	}
+	if(fails == 0){
+		cout << "ALL PASS!" << endl;
 	}
 	else {
-		cout << "ALL PASS!!" << endl; 
+		cout << fails << " FAILS!" << endl;
 	}
+
 	return 0;
+}
+
+
+void runSolution(int idx){
+	Solution *s = getSolution(idx);
+	auto answer = s->solve();
+	auto correct = s->correct();
+	mtx.lock();
+	if(answer == correct){
+		cout << "P" << setw(5) << idx << ": ";
+		cout << answer << " = " << correct << endl;
+	}
+	else {
+		fails ++;
+		cout << "F" << setw(5) << idx << ": ";
+		cout << answer << " != " << correct << endl;
+	}
+	mtx.unlock();
 }
