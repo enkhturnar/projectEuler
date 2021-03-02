@@ -8,32 +8,34 @@
 #include "solution.h"
 #include "solution_generator.h"
 
+const std::vector<Solution*> solutions{
+	new P1(),
+	new P27(),
+	new P34(),
+	new P47(),
+	new P48(),
+};
+
 Solution* getSolution(int problemNumber){
-	Solution *s;
-	switch(problemNumber) {
-		case 1:
-			s = new P1();
-		break;
-		case 27:
-			s = new P27();
-		break;
-		case 34:
-			s = new P34();
-		break;
-		case 47:
-			s = new P47();
-		break;
-		case 48:
-			s = new P48();
-		break;
-		default:
-			throw std::invalid_argument("problem number invalid");
-		break;
+	int s = 0, e = solutions.size() - 1;
+	while (s < e){
+		int mid = (s + e) / 2;
+		if(solutions[mid]->getProblemNumber() <= problemNumber){
+			s = mid + 1;
+		}
+		else {
+			e = mid;
+		}
 	}
-	return s;
+	if(solutions[s]->getProblemNumber() == problemNumber){
+		return solutions[s];
+	}
+	else{
+		throw std::invalid_argument("problem number invalid");
+		return 0;
+	}
 }
 
-
-std::vector<int> availableSolutions(){
-	return {1,27,34,47,48};
+const std::vector<Solution*>* availableSolutions(){
+	return &solutions;
 }

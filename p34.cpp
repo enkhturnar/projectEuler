@@ -9,13 +9,12 @@ class P34 : public Solution {
 	std::map<int,int> mp;
 	std::vector<int> fct;
 public:
-	P34(){
+	P34(): Solution(34){};
+	int digitSum(int x){
 		fct.push_back(1);
 		for(int i = 1; i < 10; i++){
 			fct.push_back(fct.back()*i);
 		}
-	};
-	int digitSum(int x){
 		if(mp.find(x) != mp.end()){
 			return mp[x];
 		}

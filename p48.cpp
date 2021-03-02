@@ -6,7 +6,7 @@
 
 class P48 : public Solution {
 public:
-	P48(){};
+	P48(): Solution(48){};
 	std::string solve(){
 		long long mod = 1e10;
 		long long sum = 0;

@@ -5,7 +5,7 @@
 
 class P27: public Solution {
 public:
-	P27(){};
+	P27(): Solution(27){};
 
 	int func(int a, int b, int n){
 		return n*n + a*n + b;

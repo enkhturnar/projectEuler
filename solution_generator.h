@@ -8,6 +8,6 @@
 
 Solution* getSolution(int problemNumber);
 
-std::vector<int> availableSolutions();
+const std::vector<Solution*>* availableSolutions();
 
 #endif

@@ -4,7 +4,7 @@
 
 class P1 : public Solution {
 public:
-	P1(){};
+	P1(): Solution(1){};
 	std::string solve(){
 		int sum = 0;
 		for(int i = 1 ; i < 1000; i++){

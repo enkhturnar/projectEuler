@@ -5,7 +5,7 @@
 
 class P47 : public Solution {
 public:
-	P47(){};
+	P47(): Solution(47){};
 	bool have4distict(int n){
 		for(int i = 0 ; i < 4; i++){
 			auto fact = primeFactorization(n + i);
